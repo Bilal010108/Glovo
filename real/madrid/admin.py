@@ -51,6 +51,8 @@ admin.site.register(Courier)
 admin.site.register(Review)
 admin.site.register(CourierReview)
 admin.site.register(StoreReview)
+admin.site.register(Cart)
+admin.site.register(CartItem)
 
 
 

@@ -70,9 +70,11 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 
+
 class CategoryDetailAPIView(generics.RetrieveAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategorySerializers
+    serializer_class = CategoryDetailSerializers
+
 
 class CategoryCreateAPIView(generics.ListCreateAPIView):
     queryset = Category .objects.all()
@@ -90,6 +92,9 @@ class StoreListAPIView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     search_fields = ['store_name']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+
 
 
 
@@ -225,17 +230,29 @@ class CartListViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class =CartSerializers
 
+    def get_queryset(self):
+        return Cart.objects.filter(client_cart=self.request.user)
+
+
 class CartDetailViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class =CartSerializers
+
+    def get_queryset(self):
+        return Cart.objects.filter(client_cart=self.request.user)
+
+
 
 class CartItemListViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartItemSerializers
 
+
 class CartItemDetailViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartItemSerializers
+
+
 
 
 

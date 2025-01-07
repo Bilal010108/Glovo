@@ -64,16 +64,19 @@ class CategorySerializers(serializers.ModelSerializer):
         fields =['category_name']
 
 
-class CategoryDetailSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields =['store_name','store_description','contact_info','address','owner']
-
-
 class ProductSerializers(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['product_name','description','price','quantity','store']
+
+
+class CategoryDetailSerializers(serializers.ModelSerializer):
+    category_product = ProductSerializers(many=True,read_only=True)
+
+    class Meta:
+        model = Category
+        fields =['category_name', 'category_product']
+
 
 
 
@@ -139,7 +142,7 @@ class StoreReviewSerializer(serializers.ModelSerializer):
 class CourierReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourierReview
-        fields = ['client', 'rating', 'comment', 'created_date']
+        fields = ['client', 'rating', 'comment_courier', 'created_date']
 
 
 

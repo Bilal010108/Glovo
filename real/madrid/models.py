@@ -80,7 +80,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField(default=0)
     quantity =models.PositiveSmallIntegerField(default=1)
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='store_product')
-
+    category =models.ForeignKey(Category,on_delete=models.CASCADE,related_name='category_product')
     def __str__(self):
         return f'{self.product_name}'
 
@@ -166,7 +166,7 @@ class Review(models.Model):
     client_review = models.ForeignKey(UserProfile, related_name='client_review',on_delete=models.CASCADE)
     store_review = models.ForeignKey(Store, related_name='store_reviews',on_delete=models.CASCADE)
     rating = models.IntegerField(choices=[(i, str(i)) for  i in  range(1, 6)])
-    comment =models.CharField(max_length=100,null=True,blank=True)
+    comment = models.TextField(null=True,blank=True)
     created_at = models.DateField(auto_now_add=True)
 
 
@@ -219,8 +219,9 @@ class ComboImage(models.Model):
 class Cart(models.Model):
     client_cart = models.ForeignKey(UserProfile,related_name='client_cart',on_delete=models.CASCADE)
 
+
     def __str__(self):
-       return self.client_cart
+       return str(self.client_cart)
 
 
 class CartItem(models.Model):
@@ -228,7 +229,7 @@ class CartItem(models.Model):
     product_cart = models.ForeignKey(Product,related_name='product_cart',on_delete=models.CASCADE)
     quantity_cart =models.PositiveSmallIntegerField(default=1)
     def __str__(self):
-        return self.product_cart
+        return str(self.product_cart)
 
 
 
