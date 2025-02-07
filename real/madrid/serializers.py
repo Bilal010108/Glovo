@@ -124,6 +124,7 @@ class CartSerializers(serializers.ModelSerializer):
         model = Cart
         fields =['client_cart']
 
+
 class CartItemSerializers(serializers.ModelSerializer):
     class Meta:
         model = CartItem

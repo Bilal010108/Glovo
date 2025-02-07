@@ -256,7 +256,6 @@ class CartItemDetailViewSet(viewsets.ModelViewSet):
 
 
 
-
 class StoreReviewViewSet(viewsets.ModelViewSet):
     queryset = StoreReview.objects.all()
     serializer_class = StoreReviewSerializer
